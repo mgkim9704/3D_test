@@ -1,43 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-  <script src="three.js"></script>
-  <script>
-  window.addEventListener('load', function(){
-    var width = window.innerWidth;
-    var height = window.innerHeight;
-                          
-    var renderer = new THREE.CanvasRenderer();
-    renderer.setSize(width, height);
-    document.body.appendChild(renderer.domElement);
-    
-    var scene = new THREE.Scene();
-    
-    var camera = new THREE.PerspectiveCamera();
-    camera.position.set(0, 0, 200);
-    
-    var light = new THREE.PointLight();
-    light.position.set(1000,1000,1000);
-    scene.add(light);
-    
-    var geometry = new THREE.CubeGeometry(100, 100, 100);
-    var material = new THREE.MeshLambertMaterial({
-      color: 0xffffff
-    });
-    
-    var mesh = new THREE.Mesh(geometry, material);
-    mesh.position.set(0, 0, 0);
-    scene.add(mesh);
-    
-    renderer.render(scene, camera);
-                          });
-  </script>
-  <style>
-    * {margin:0;padding:0; }
-    body {overflow:hidden; }
-  </style>
+	<meta charset="utf-8">
+	<title> Final project </title>
 </head>
-<body>
-
+<body>		
+	<h1> Load Files! </h1>
+	<p> Open an audio file from your local folder and play/stop it by clicking the buttons.</p>
+	
+	<input id="fileChooseInput" type="file"></input>
+	<button onclick="playSound(myAudioBuffer)">Play</button>
+	<button onclick="stopSound()">Stop</button>	  
+	<script>	
+	var context;
+	var myAudioBuffer = null;
+	// initialization
+	window.onload=function(){
+		var control = document.getElementById("fileChooseInput");
+		control.addEventListener("change", fileChanged, false);
+		window.AudioContext = window.AudioContext || window.webkitAudioContext;
+		context = new AudioContext();
+	}
+	// 
+	function fileChanged(e){
+		var file = e.target.files[0];
+		var fileReader = new FileReader();
+		fileReader.onload = fileLoaded;
+		fileReader.readAsArrayBuffer(file);
+	}
+	function fileLoaded(e){
+	    context.decodeAudioData(e.target.result, function(buffer) {
+	      myAudioBuffer = buffer;
+	    });
+	    console.log("File has been loaded.")
+	}
+	var source = null;
+	function playSound(anybuffer) {
+	  source = context.createBufferSource();
+	  source.buffer = anybuffer;
+	  source.connect(context.destination);
+	  source.start();
+	}
+	function stopSound() {
+	  if (source) {
+	    source.stop();
+	  }
+	}	   	
+	</script>
 </body>
 </html>
