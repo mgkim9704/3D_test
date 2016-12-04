@@ -46,6 +46,12 @@
 			mesh.position.set(0,0,0);
 			scene.add(mesh);
 			
+			var cubegeometry = new THREE.CubeGeometry(10,10,10);
+			var cubematerial = new THREE.MeshBasicMaterial({wireframe: true, color: 0x000000});
+			var cube = new THREE.Mesh(cubegeometry, cubematerial);
+			cube.position.set(-20, 0, 0);
+			scene.add(cube);
+			
 			requestAnimationFrame(loop);
 		});
 	</script>
