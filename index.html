@@ -37,7 +37,7 @@
 			
 			init();
 			
-			var geometry = new THREE.SphereGeometry(50,20,20);
+			var geometry = new THREE.SphereGeometry(10,20,20);
 			var material = new THREE.MeshLambertMaterial({
 				color: 0xffffff
 			});
@@ -49,7 +49,7 @@
 			var cubegeometry = new THREE.CubeGeometry(10,10,10);
 			var cubematerial = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffffff});
 			var cube = new THREE.Mesh(cubegeometry, cubematerial);
-			cube.position.set(-20, 0, 0);
+			cube.position.set(-20, -20, -20);
 			scene.add(cube);
 			
 			requestAnimationFrame(loop);
