@@ -15,7 +15,11 @@
 			
 			var scene = new THREE.Scene();
 			
-			var camera = new THREE.PerspectiveCamera();
+			var angle=45;
+			var aspect=width/height;
+			var near=0.1;
+			var far=10000;
+			var camera = new THREE.PerspectiveCamera(angle, aspect, near, far);
 			camera.position.set(0,0,200);
 			
 			var light = new THREE.PointLight();
