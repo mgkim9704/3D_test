@@ -21,7 +21,7 @@
 			var near=0.1;
 			var far=10000;
 			camera = new THREE.PerspectiveCamera(angle, aspect, near, far);
-			camera.position.set(0,0,200);
+			camera.position.set(0,0,1000);
 			
 			var light = new THREE.PointLight();
 			light.position.set(1000,1000,1000);
@@ -29,6 +29,12 @@
 		}
 		
 		function loop() {
+			list.forEach(function (item){
+				item.rotation.x += 0.02;
+				item.rotation.y += 0.02;
+				item.rotation.z += 0.02;
+			});
+			
 			renderer.render(scene, camera);
 			requestAnimationFrame(loop);
 		}
@@ -37,20 +43,22 @@
 			
 			init();
 			
-			var geometry = new THREE.SphereGeometry(10,20,20);
-			var material = new THREE.MeshLambertMaterial({
-				color: 0xffffff
-			});
+			var random = function(limit){
+				return Math.round(Math.random() * limit);
+			};
 			
-			var mesh = new THREE.Mesh(geometry, material);
-			mesh.position.set(0,0,0);
-			scene.add(mesh);
+			list=[];
+			for (var i=0; i<50; i++) {
+				var geometry = new THREE.CubeGeometry(50,50,50);
+				var material = new THREE.MeshLambertMaterial({
+					color: 0xff0000
+				});
 			
-			var cubegeometry = new THREE.CubeGeometry(10,10,10);
-			var cubematerial = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffffff});
-			var cube = new THREE.Mesh(cubegeometry, cubematerial);
-			cube.position.set(-20, -20, -20);
-			scene.add(cube);
+				var mesh = new THREE.Mesh(geometry, material);
+				mesh.position.set(random(3000)-1500,0,random(3000)-1500);
+				scene.add(mesh);
+				list.push(mesh);
+			}
 			
 			requestAnimationFrame(loop);
 		});
