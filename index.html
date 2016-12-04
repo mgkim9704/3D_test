@@ -9,7 +9,7 @@
 			var width = window.innerWidth;
 			var height = window.innerHeight;
 			
-			var renderer = new THREE.CanvasRenderer();
+			var renderer = new THREE.WebGLRenderer();
 			renderer.setSize(width, height);
 			document.body.appendChild(renderer.domElement);
 			
@@ -22,8 +22,8 @@
 			light.position.set(1000,1000,1000);
 			scene.add(light);
 			
-			var geometry = new THREE.CubeGeometry(100,100,100);
-			var material = new THREE.MeshLamberMaterial({
+			var geometry = new THREE.BoxGeometry(100,100,100);
+			var material = new THREE.MeshBasicMaterial({
 				color: 0xffffff
 			});
 			
