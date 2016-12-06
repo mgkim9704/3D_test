@@ -1,4 +1,4 @@
-$(function(){
+window.onload=function(){
     var ctx = new AudioContext();
     var audio = document.getElementById("demoAudio");
     var audioSrc = ctx.createMediaElementSource(audio);
@@ -220,7 +220,7 @@ $(function(){
         renderer.render(scene, camera);
     }
     
-    $(window).resize(function(){
+    window.resize(function(){
 
 
         SCREEN_WIDTH = window.innerWidth;
@@ -237,4 +237,4 @@ $(function(){
     init(); 
     animate();
     audio.play();   
-}); 
+}; 
