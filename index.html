@@ -13,7 +13,12 @@
 	* { margin:0;padding:0; }
 	body {overflow:hidden;}
 </style>
-<body>		
-  <div id ="webGL-container"></div>
+<body>	
+	<p>Open an audio file from your local folder and play/stop it by clicking the buttons.</p>
+	
+	<input id="fileChooseInput" type="file"></input>
+	<button onclick="playSound(myAudioBuffer)">Play</button>
+	<button onclick="stopSound()">Stop</button>
+	
 </body>
 </html>
