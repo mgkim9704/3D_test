@@ -1,11 +1,17 @@
 window.onload=function(){
     var ctx = new AudioContext();
     var audio = document.getElementById("demoAudio");
-    var audioSrc = ctx.createMediaElementSource(audio);
     var analyser = ctx.createAnalyser();
+    analyser.smoothingTimeConstant = 0;
 
-    audioSrc.connect(analyser);
-    audioSrc.connect(ctx.destination);
+	var demoReq = new XMLHttpRequest();
+    demoReq.open("Get","demo.mp3",true);
+    demoReq.responseType = "arraybuffer";
+    demoReq.onload = function(){
+        context.decodeAudioData(demoReq.response, function(buffer){demo_buffer = buffer;});
+    }
+    demoReq.send();
+    
     // frequencyBinCount tells you how many values you'll receive from the analyser
     var frequencyData = new Uint8Array(analyser.frequencyBinCount); 
     var cube, cubeMaterial, cubeGeometry;
