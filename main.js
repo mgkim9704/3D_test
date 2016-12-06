@@ -9,6 +9,7 @@ var analyser = null;
 var vis_view;
 var vis_value;
 
+var filePlayOn = false;
 var demo_buffer;
 
 window.onload=function(){
