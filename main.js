@@ -13,32 +13,29 @@ var demo_buffer;
 
 window.onload=function(){
 
-  var control = document.getElementById("fileChooseInput");
-  control.addEventListener("change", fileChanged, false);
+	var control = document.getElementById("fileChooseInput");
+	control.addEventListener("change", fileChanged, false);
   
-  var musciAudio = document.getElementById("Play");
-	musciAudio.addEventListener("click", playFile, false);
+	var _Audio = document.getElementById("_Audio");
+	_Audio.addEventListener("click", playFile, false);
     
 	// create audio context
-  window.AudioContext = window.AudioContext || window.webkitAudioContext;
-  context = new AudioContext();
+	window.AudioContext = window.AudioContext || window.webkitAudioContext;
+	context = new AudioContext();
   
-  var demoAudio = document.getElementById("demoAudio");
-	demoAudio.addEventListener("click", playFile, false);
-
 	
 	// analyzer
-  analyser = context.createAnalyser();
-  analyser.fftSize = 2048;
+	analyser = context.createAnalyser();
+	analyser.fftSize = 2048;
 	analyser.smoothingTimeConstant = 0;		
 
 	var demoReq = new XMLHttpRequest();
-    demoReq.open("Get","demo.mp3",true);
-    demoReq.responseType = "arraybuffer";
-    demoReq.onload = function(){
-        context.decodeAudioData(demoReq.response, function(buffer){demo_buffer = buffer;});
-    }
-    demoReq.send();
+	demoReq.open("Get","demo.mp3",true);
+	demoReq.responseType = "arraybuffer";
+	demoReq.onload = function(){
+		context.decodeAudioData(demoReq.response, function(buffer){demo_buffer = buffer;});
+	}
+	demoReq.send();
 }
 
 
@@ -59,40 +56,40 @@ function fileLoaded(e){
 
 
 function playFile() {
-    if (filePlayOn) {
-    	turnOffFileAudio();
-    	return;
-    }
+	if (filePlayOn) {
+		turnOffFileAudio();
+		return;
+	}
 
-    sourceNode = context.createBufferSource();
+	sourceNode = context.createBufferSource();
 
-    sourceNode.buffer = demo_buffer;
-    sourceNode.connect(context.destination);
-    sourceNode.start(0);
+	sourceNode.buffer = demo_buffer;
+	sourceNode.connect(context.destination);
+	sourceNode.start(0);
 
 	sourceNode.connect(analyser);
 
 	// visualize audio animation
-    animation_id = setInterval(animation_function, context.sampleRate/analyser.fftSize);
+	animation_id = setInterval(animation_function, context.sampleRate/analyser.fftSize);
 
 	filePlayOn = true;
 	
-	var demoAudio = document.getElementById("demoAudio");
-	demoAudio.innerHTML = 'Stop'
+	var _Audio = document.getElementById("_Audio");
+	_Audio.innerHTML = 'Stop'
 }
 
 
 function turnOffFileAudio() {
-	var demoAudio = document.getElementById("demoAudio");
-	demoAudio.innerHTML = 'Play'
+	var _Audio = document.getElementById("_Audio");
+	_Audio.innerHTML = 'Play'
 	sourceNode.stop(0);
-  sourceNode = null;
-  filePlayOn = false;
+	sourceNode = null;
+	filePlayOn = false;
 
 	stopAnimation();
 }
 
 
 function stopAnimation() { 
-    clearInterval(animation_id);
+	clearInterval(animation_id);
 }
