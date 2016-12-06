@@ -8,7 +8,7 @@ window.onload=function(){
     demoReq.open("Get","demo.mp3",true);
     demoReq.responseType = "arraybuffer";
     demoReq.onload = function(){
-        context.decodeAudioData(demoReq.response, function(buffer){demo_buffer = buffer;});
+        ctx.decodeAudioData(demoReq.response, function(buffer){demo_buffer = buffer;});
     }
     demoReq.send();
     
@@ -226,7 +226,7 @@ window.onload=function(){
         renderer.render(scene, camera);
     }
     
-    window.resize(function(){
+    $(window).resize(function(){
 
 
         SCREEN_WIDTH = window.innerWidth;
