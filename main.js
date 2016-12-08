@@ -25,10 +25,8 @@ window.onload=function(){
 	_Audio.addEventListener("click", playFile, false);
     
 	// create audio context
-	window.AudioContext = window.AudioContext || window.webkitAudioContext;
-	context = new AudioContext();
-  
-	
+	context = new(window.AudioContext || window.webkitAudioContext)();
+
 	// analyzer
 	analyser = context.createAnalyser();
 	analyser.fftSize = 256;
