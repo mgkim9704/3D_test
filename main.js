@@ -10,6 +10,9 @@ var vis_view;
 var vis_value;
 
 var filePlayOn = false;
+
+var animation_function;
+
 var demo_buffer;
 
 window.onload=function(){
@@ -27,7 +30,7 @@ window.onload=function(){
 	
 	// analyzer
 	analyser = context.createAnalyser();
-	analyser.fftSize = 2048;
+	analyser.fftSize = 256;
 	analyser.smoothingTimeConstant = 0;		
 
 	var demoReq = new XMLHttpRequest();
@@ -37,7 +40,15 @@ window.onload=function(){
 		context.decodeAudioData(demoReq.response, function(buffer){demo_buffer = buffer;});
 	}
 	demoReq.send();
+	
+	animation_function = draw_3d
 }
+
+function draw_3d() {
+	var frequencyData = new Uint8Array(analyser.frequencyBinCount);
+	console.log(frequencyData);
+	var cube, cubeMaterial, cubeGeometry;
+	var scene, camera, renderer;
 
 
 function fileChanged(e){
