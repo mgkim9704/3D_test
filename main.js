@@ -25,7 +25,8 @@ window.onload=function(){
 	_Audio.addEventListener("click", playFile, false);
     
 	// create audio context
-	context = new(window.AudioContext || window.webkitAudioContext)();
+	window.AudioContext = window.AudioContext || window.webkitAudioContext;
+	context = new AudioContext();
 
 	// analyzer
 	analyser = context.createAnalyser();
