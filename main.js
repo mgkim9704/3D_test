@@ -50,6 +50,31 @@ function draw_3d() {
 	console.log(frequencyData);
 	var cube, cubeMaterial, cubeGeometry;
 	var scene, camera, renderer;
+	
+	window.addEventListener('load', function() {
+			
+		init();
+			
+		var random = function(limit){
+			return Math.round(Math.random() * limit);
+		};
+			
+		list=[];
+		for (var i=0; i<50; i++) {
+			var geometry = new THREE.CubeGeometry(50,50,50);
+			var material = new THREE.MeshLambertMaterial({
+				color: 0xff0000
+			});
+			
+			var mesh = new THREE.Mesh(geometry, material);
+			mesh.position.set(random(3000)-1500,0,random(3000)-1500);
+			scene.add(mesh);
+			list.push(mesh);
+		}
+			
+		requestAnimationFrame(loop);
+	});
+	
 }
 
 function fileChanged(e){
