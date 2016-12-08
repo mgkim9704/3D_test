@@ -12,6 +12,7 @@ var vis_value;
 var filePlayOn = false;
 
 var animation_function;
+var animation_id;
 
 var demo_buffer;
 
