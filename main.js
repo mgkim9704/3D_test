@@ -50,7 +50,7 @@ function draw_3d() {
 	console.log(frequencyData);
 	var cube, cubeMaterial, cubeGeometry;
 	var scene, camera, renderer;
-
+}
 
 function fileChanged(e){
 	var file = e.target.files[0];
