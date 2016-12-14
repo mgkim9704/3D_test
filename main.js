@@ -22,7 +22,7 @@ window.onload=function(){
 	control.addEventListener("change", fileChanged, false);
   
 	var _Audio = document.getElementById("_Audio");
-	_Audio.addEventListener("click", playFile, false);
+	_Audio.addEventListener("click", playFile(myAudioBuffer), false);
     
 	// create audio context
 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -92,7 +92,7 @@ function fileLoaded(e){
 }
 
 
-function playFile() {
+function playFile(anybuffer) {
 	if (filePlayOn) {
 		turnOffFileAudio();
 		return;
@@ -100,7 +100,7 @@ function playFile() {
 
 	sourceNode = context.createBufferSource();
 
-	sourceNode.buffer = demo_buffer;
+	sourceNode.buffer = anybuffer;
 	sourceNode.connect(context.destination);
 	sourceNode.start(0);
 
