@@ -33,13 +33,13 @@ window.onload=function(){
 	analyser.fftSize = 256;
 	analyser.smoothingTimeConstant = 0;		
 
-	var demoReq = new XMLHttpRequest();
-	demoReq.open("Get","demo.mp3",true);
-	demoReq.responseType = "arraybuffer";
-	demoReq.onload = function(){
-		context.decodeAudioData(demoReq.response, function(buffer){demo_buffer = buffer;});
-	}
-	demoReq.send();
+	//var demoReq = new XMLHttpRequest();
+	//demoReq.open("Get","demo.mp3",true);
+	//demoReq.responseType = "arraybuffer";
+	//demoReq.onload = function(){
+	//	context.decodeAudioData(demoReq.response, function(buffer){demo_buffer = buffer;});
+	//}
+	//demoReq.send();
 	
 	animation_function = draw_3d
 }
@@ -104,7 +104,7 @@ function playFile(anybuffer) {
 	sourceNode.connect(context.destination);
 	sourceNode.start(0);
 
-	sourceNode.connect(analyser);
+	//sourceNode.connect(analyser);
 
 	// visualize audio animation
 	animation_id = setInterval(animation_function, context.sampleRate/analyser.fftSize);
